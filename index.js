@@ -143,7 +143,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
      //  if(saved_shop==referer){
         var filePath= '/'+req.params.jsfile ;
         res.writeHead(200, {'Content-Type': 'text/javascript'});
-        const readStream = await fs.createReadStream(filePath);
+        const readStream =   fs.createReadStream(filePath);
         readStream.pipe(res); 
       /*  } else{
         res.status(500).send("OOPS!!");
