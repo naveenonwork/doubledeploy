@@ -129,7 +129,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
   var referer=req.headers.referer; 
    /* referer= referer.replace(/\/$/, ""); */
     var id=req.params.id;
-     res.status(500).send(MongoPath);  
+    
     mongoClient = await connectToDatabse(MongoPath);
    
 
@@ -140,7 +140,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
        settings=data;
        count=data.length;
       });  
-      
+      res.status(200).send(settings);  
      /*var saved_shop="https://"+settings.shop+'/';
       //res.status(200).send(saved_shop);
      //  if(saved_shop==referer){
