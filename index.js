@@ -115,7 +115,7 @@ app.get("/static/glb/:glbfile",   async  (req, res) => {
 
 app.get("/static/script/:jsfile",   async  (req, res) => {
    var referer=req.headers.referer;
-  var filePath=cwd +'/'+req.params.jsfile ;
+  var filePath=cwd +'/public/'+req.params.jsfile ;
   res.writeHead(200, {'Content-Type': 'text/javascript'});
   const readStream = fs.createReadStream(filePath);
   readStream.pipe(res); 
