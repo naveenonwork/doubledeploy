@@ -52,7 +52,7 @@ app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
   preserveExtension: true,
-  tempFileDir: cwd+'/public/temp'
+  tempFileDir:  '/tmp'
 })); 
 app.use(express.static('public'));
 app.get("/api/products/count", async (_req, res) => {
