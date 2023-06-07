@@ -19,12 +19,11 @@ import Showroom from "../3d/Showroom";
 import GW3D from "../3d/GW3D";
 import LoadingScene from "../3d/LoadingScene";
 import Rigg from "../3d/Rigg";
- 
 // import ReactSlider from "react-slider";
 // import "react-slider/dist/index.css";
 
-const female = "../../assets/glbs/AvatarF.glb";
-const male = "../../assets/glbs/AvatarM.glb";
+const female = "/AvatarF.glb";
+const male = "/AvatarM.glb";
 
 const ModelViewer = ({ url }) => {
   const { scene } = useGLTF(url, true);

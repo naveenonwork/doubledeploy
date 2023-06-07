@@ -99,7 +99,7 @@ const UpperGarmentGlb = ({ garmentGlb }) => {
     <primitive
       object={scene.scene}
       // scale={2.05}
-      position={[.010, 0.019, 0]}
+      position={[.013, 0.026, 0.02]}
     />
   );
 };
@@ -110,8 +110,8 @@ const LowerGarmentGlb = ({ lowerGarmentGlb }) => {
   return (
     <primitive
       object={scene.scene}
-      rotation={[-0.01, 0, 0]}
-      position={[-0.01, 0, 0.002]}
+      // rotation={[-0.01, 0, 0]}
+      // position={[-0.01, 0, 0.002]}
     />
   );
 };
@@ -137,20 +137,19 @@ const Test2 = ({ name }) => {
   if (app) {
     localOrigin = app.localOrigin;
   }
-  const handleGarmentCall = async (size) => {
+  const handleGarmentCall = async (selectedSize) => {
     event.preventDefault();
     setShowGarment(true);
     setGarmentLoad(true);
     var productid = "ed56cb15a";
-    var session = "53555";
+    var session = "fem3";
     // var size = selectedSize;
-    console.log("sizeis:", size);
     const payload = {
       method: "POST",
       body: JSON.stringify({
         productid: productid,
         session: session,
-        size: size.toLowerCase(),
+        size: selectedSize.toLowerCase(),
         localOrigin: localOrigin,
       }),
       headers: { "Content-Type": "application/json" },
@@ -217,7 +216,6 @@ const Test2 = ({ name }) => {
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
   const handleSizeClick = async (size) => {
-    console.log('sizeclick',size)
     setSelectedSize(size);
     await handleGarmentCall(size)
   };
@@ -330,7 +328,7 @@ const Test2 = ({ name }) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ duration: 0.6 }}
-                  onClick={handleGarmentCall}
+                  onClick={setShowGarment(true)}
                   className="yes-avatar"
                 >
                   Approve Avatar
@@ -345,7 +343,6 @@ const Test2 = ({ name }) => {
                       selectedSize === size ? "active" : ""
                     }`}
                     onClick={(e) => {
-                      
                       handleSizeClick(size);
                       handleGarmentCall(e);
                     }}
