@@ -140,17 +140,17 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
        settings=data;
        count=data.length;
       });  
-      res.status(200).send(settings);  
-     /*var saved_shop="https://"+settings.shop+'/';
-      //res.status(200).send(saved_shop);
-     //  if(saved_shop==referer){
-        var filePath= '/'+req.params.jsfile ;
+      
+    /*  var saved_shop="https://"+settings.shop+'/';
+      //res.status(200).send(saved_shop); 
+        if(saved_shop==referer){*/
+        var filePath=cwd +'/public/'+req.params.jsfile ;
         res.writeHead(200, {'Content-Type': 'text/javascript'});
         const readStream =   fs.createReadStream(filePath);
         readStream.pipe(res); 
-        } else{
+     /*    } else{
         res.status(500).send("OOPS!!");
-       } */
+       }  */ 
        
   
 })
