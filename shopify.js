@@ -16,7 +16,10 @@ const billingConfig = {
     interval: BillingInterval.OneTime,
   },
 };
+const MongoDBPath =  process.env.NODE_ENV === "production"
+? process.env.MONGODB_URI: "mongodb://localhost" ;
 
+ 
 const shopify = shopifyApp({
   api: {
     apiVersion: LATEST_API_VERSION,
@@ -32,7 +35,7 @@ const shopify = shopifyApp({
   },
   // This should be replaced with your preferred storage strategy
   sessionStorage: new MongoDBSessionStorage(
-    'mongodb://localhost',      //'mongodb://username:password@host/',
+    MongoDBPath,      //'mongodb://username:password@host/',
     'double',
   ),
 });
