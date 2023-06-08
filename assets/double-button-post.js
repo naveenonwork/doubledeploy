@@ -7,8 +7,7 @@ if(double_button_opener){
     product_id=double_button_opener.getAttribute('data-id')
   
     host=double_button_opener.getAttribute('data-host')
-    //host_location="SHOPIFY_LOCATION_URL";
-    host_location=double_button_opener.getAttribute('data-origin')
+    host_location="https://pci-thinkpad-availability-bet.trycloudflare.com";
    const btn = document.createElement("BUTTON") 
     btn.addEventListener('click', function(event) {
  
@@ -23,7 +22,7 @@ if(double_button_opener){
       product_id=selectedID;
       let a= document.createElement('a');
       a.target= '_new';
-      a.href= host_location+"/double?host="+host+"&id="+product_id; 
+      a.href= host_location+"double?host="+host+"&id="+product_id; 
       a.click();
     });   
   //  const btn  = document.createElement('a'); 
