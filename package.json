@@ -7,6 +7,7 @@
     "debug": "node --inspect-brk index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js --ignore ./frontend",
     "serve": "cross-env NODE_ENV=production node index.js",
+    
     "vercel-build": "cd frontend && npm install && npm run build"
   },
   "type": "module",

@@ -188,7 +188,7 @@ app.post("/static/avatar",   async  (req, res) => {
       form.append('gender', gender);
       form.append('file',  filedata);
      
-      var glbfileurl='';
+      try {  
       await fetch(url, {
         method: 'POST',
         body: form,
@@ -203,7 +203,10 @@ app.post("/static/avatar",   async  (req, res) => {
           //console.error(error);
           result=error;
         }); 
-      
+      } catch (error) {
+        // Code to handle the error or exception
+        result=error;
+      }
 
         res.status(200).send(result);
    
@@ -245,7 +248,10 @@ app.post("/static/garment",   async  (req, res) => {
 });
 
 
-
+app.post("/static/ping",   async  (req, res) => {
+  const result="You get it all right!!";
+  res.status(200).send(result);
+})
 
 
 app.post("/static/testgarment",   async  (req, res) => {
