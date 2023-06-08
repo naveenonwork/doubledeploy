@@ -57,6 +57,7 @@ app.use(fileupload({
 })); 
 //app.use(express.static('public'));
 app.use(express.static(STATIC_PATH));
+
 app.get("/api/products/count", async (_req, res) => {
  
   const countData = await shopify.api.rest.Product.count({
@@ -166,7 +167,7 @@ app.post("/static/avatar",   async  (req, res) => {
   const size = req.body.size;
   const gender = req.body.gender; 
   const imageType = req.files.file.mimetype.replace('image/', '.')
-  console.log(imageType)
+ 
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
   //filepath =    cwd+'/public/'+filename; 
