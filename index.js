@@ -12,10 +12,7 @@ import GDPRWebhookHandlers from "./gdpr.js";
 import fileupload from "express-fileupload";
 import  fetch    from   "node-fetch" ;
 import  FormData  from  "form-data";
-import  http  from  "https";
- 
- 
- 
+import  http  from  "https"; 
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 const MongoPath =  process.env.NODE_ENV === "production"
@@ -47,12 +44,12 @@ app.use("/api/*", shopify.validateAuthenticatedSession());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-/* app.use(fileupload({
+ app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
   preserveExtension: true,
   tempFileDir:  '/tmp/'
-})); */ 
+}));  
 app.use(express.static(STATIC_PATH));
 app.get("/api/products/count", async (_req, res) => {
  
@@ -166,30 +163,30 @@ app.post("/static/avatar",   async  (req, res) => {
   const size = req.body.size;
   const gender = req.body.gender; 
   const imageType = req.files.file.mimetype.replace('image/', '.')
+  
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
-  
- // fs.renameSync(file.tempFilePath, filepath) 
+      //filepath =    cwd+'/public/'+filename; 
+  fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
-   
- // var filedata=await fs.createReadStream(filepath);
-
-  const fileStream = createReadStream(req.files.file.path);
- /*  await file.mv(`${filepath}`, (err) => {
+   //result=filepath;
+ var filedata=await fs.createReadStream(filepath);
+   /*await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
   });  */
-  const url = 'https://hybrik.azurewebsites.net/';
+ 
+    const url = 'https://hybrik.azurewebsites.net/';
     const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
-     // const size = 10;
+       //  size = 10;
       //const gender = 'm';
       
-     const form = new FormData();
+    const form = new FormData();
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
-      form.append('file',   fileStream);
+      form.append('file',  filedata);
      
       var glbfileurl='';
       await fetch(url, {
@@ -198,20 +195,16 @@ app.post("/static/avatar",   async  (req, res) => {
         headers: form.getHeaders(),
       })
       .then((response) => response.text())
-      .then((data) => {
-          
+        .then((data) => {
          // console.log(data); 
          result=data;
         })
-      .catch((error) => {
+        .catch((error) => {
           //console.error(error);
-           
           result=error;
-        });    
-       /*   
-        */ 
+        }); 
       
-        
+
         res.status(200).send(result);
    
 });
