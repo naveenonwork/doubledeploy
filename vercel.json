@@ -10,15 +10,5 @@
         }
       }
     ],
-    "routes": [{ "src": "/(.*)", "dest": "/" }],
-    "functions": {
-      "static/avatar/": {
-        "memory": 3008,
-        "maxDuration": 200
-      },
-      "static/garment": {
-        "memory": 3008,
-        "maxDuration": 300
-      }
-    }
+    "routes": [{ "src": "/(.*)", "dest": "/" }]
   }

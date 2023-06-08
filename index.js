@@ -156,7 +156,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
 })
 
 
-app.post("/static/avatar",   async  (req, res) => {
+app.post("/pages/avatar",   async  (req, res) => {
   const unique_session_id = uuidv4();
   var fileBuffer = req.files.file.data;
   fileBuffer.name = req.files.file.name;
@@ -170,7 +170,7 @@ app.post("/static/avatar",   async  (req, res) => {
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+filename; 
   
-  fs.renameSync(file.tempFilePath, filepath)
+  fs.renameSync(file.tempFilePath, filepath) 
   //filepath=filepath+filename; 
    
  //var filedata=await fs.createReadStream(filepath);
