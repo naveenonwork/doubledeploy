@@ -166,6 +166,7 @@ app.post("/static/avatar",   async  (req, res) => {
   var filename= req.files.file.name;
   const size = req.body.size;
   const gender = req.body.gender; 
+  const sessionId = req.body.session_id;
   const imageType = req.files.file.mimetype.replace('image/', '.')
  
   //const localOrigin= req.body.localOrigin; 
@@ -175,14 +176,14 @@ app.post("/static/avatar",   async  (req, res) => {
   fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
    
- var filedata=await fs.createReadStream(filepath);
- /*  await file.mv(`${filepath}`, (err) => {
+var filedata=await fs.createReadStream(filepath);
+   await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  });  */
-  /* const url = 'https://hybrik.azurewebsites.net/';
-    const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
+  });   /**/
+  const url = 'https://hybrik.azurewebsites.net/';
+    //const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
       //const gender = 'm';
       
@@ -190,7 +191,7 @@ app.post("/static/avatar",   async  (req, res) => {
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
-      form.append('file',   fs.createReadStream(filepath));
+      form.append('file',   filedata);
      
       var glbfileurl='';
       await fetch(url, {
@@ -208,7 +209,7 @@ app.post("/static/avatar",   async  (req, res) => {
           //console.error(error);
            
           result=error;
-        });  */   
+        });   /**/   
          
         /* const glbfilename= path.basename(glbfileurl);
         //const glbDownloadFolder=cwd +'/public/glbs/';
