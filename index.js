@@ -53,7 +53,7 @@ app.use(fileupload({
   preserveExtension: true,
   tempFileDir:  '/tmp/'
 })); 
-app.use(express.static(STATIC_PATH));
+app.use(express.static('public'));
 app.get("/api/products/count", async (_req, res) => {
  
   const countData = await shopify.api.rest.Product.count({
