@@ -177,11 +177,11 @@ app.post("/static/avatar",   async  (req, res) => {
   //filepath=filepath+filename; 
    
 var filedata=await fs.createReadStream(filepath);
-   await file.mv(`${filepath}`, (err) => {
+  /* await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  });   /**/
+  });   */
   const url = 'https://hybrik.azurewebsites.net/';
     //const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
