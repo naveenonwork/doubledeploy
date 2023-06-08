@@ -168,48 +168,55 @@ app.post("/static/avatar",   async  (req, res) => {
   const gender = req.body.gender; 
   const sessionId = req.body.session_id;
   const imageType = req.files.file.mimetype.replace('image/', '.')
- 
+  console.log(imageType)
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
-
   //filepath =    cwd+'/public/'+filename; 
   fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
-   
-var filedata=await fs.createReadStream(filepath);
-  /* await file.mv(`${filepath}`, (err) => {
+   result=filepath;
+ //var filedata=await fs.createReadStream(filepath);
+   /*await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  });   */
-  const url = 'https://hybrik.azurewebsites.net/';
-    //const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
-     // const size = 10;
-      //const gender = 'm';
-      
-    const form = new FormData();
-      form.append('session_id', sessionId);
-      form.append('size', size);
-      form.append('gender', gender);
-      form.append('file',   filedata);
-     
-      var glbfileurl='';
-      await fetch(url, {
-        method: 'POST',
-        body: form,
-        headers: form.getHeaders(),
-      })
-      .then((response) => response.text())
-      .then((data) => {
-          
-         // console.log(data); 
-         result=data;
+  });  */
+  var filedata=await fs.createReadStream(filepath);
+  //result=filedata;
+    /* await file.mv(`${filepath}`, (err) => {
+      if (err) {
+        res.status(500).send({ message: "File upload failed", code: 200 });
+      } 
+    });   */
+    const url = 'https://hybrik.azurewebsites.net/';
+      //const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
+       // const size = 10;
+        //const gender = 'm';
+        
+      const form = new FormData();
+        form.append('session_id', sessionId);
+        form.append('size', size);
+        form.append('gender', gender);
+        form.append('file',   filedata);
+       
+        var glbfileurl='';
+        await fetch(url, {
+          method: 'POST',
+          body: form,
+          headers: form.getHeaders(),
         })
-      .catch((error) => {
-          //console.error(error);
-           
-          result=error;
-        });   /**/   
+        .then((response) => response.text())
+        .then((data) => {
+            
+           // console.log(data); 
+           result=data;
+          })
+        .catch((error) => {
+            //console.error(error);
+             
+            result=error;
+          });   
+         
          
         /* const glbfilename= path.basename(glbfileurl);
         //const glbDownloadFolder=cwd +'/public/glbs/';
