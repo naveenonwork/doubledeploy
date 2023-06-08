@@ -165,11 +165,13 @@ app.post("/static/avatar",   async  (req, res) => {
   var filename= req.files.file.name;
   const size = req.body.size;
   const gender = req.body.gender; 
-  const imageType = req.files.file.mimetype.replace('image/', '.')
+  const ext = req.files.file.mimetype.replace('image/', '.')
+
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+imageType; 
-  filepath =cwd+'/public/';
-   //fs.renameSync(file.tempFilePath, filepath) 
+  var filepath =    file.tempFilePath+ext; 
+//fs.renameSync(file.tempFilePath, filepath) ;
+   /*filepath =cwd+'/public/';
+   //
   filepath=filepath+filename; 
    
  //var filedata=await fs.createReadStream(filepath);
@@ -177,7 +179,7 @@ app.post("/static/avatar",   async  (req, res) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  }); /*  */
+  });  */
   const url = 'https://hybrik.azurewebsites.net/';
     const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
