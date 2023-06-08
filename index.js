@@ -170,12 +170,12 @@ app.post("/static/avatar",   async  (req, res) => {
  
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
-  result =filepath;
+
   //filepath =    cwd+'/public/'+filename; 
   fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
    
- //var filedata=await fs.createReadStream(filepath);
+ var filedata=await fs.createReadStream(filepath);
  /*  await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
