@@ -165,17 +165,15 @@ app.post("/static/avatar",   async  (req, res) => {
   var filename= req.files.file.name;
   const size = req.body.size;
   const gender = req.body.gender; 
-  const ext = req.files.file.mimetype.replace('image/', '.')
-
+  const imageType = req.files.file.mimetype.replace('image/', '.')
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+ext; 
-//fs.renameSync(file.tempFilePath, filepath) ;
-   /*filepath =cwd+'/public/';
-   //
-  filepath=filepath+filename; 
+  var filepath =    file.tempFilePath+imageType; 
+  
+  fs.renameSync(file.tempFilePath, filepath) 
+  //filepath=filepath+filename; 
    
- //var filedata=await fs.createReadStream(filepath);
-  await file.mv(`${filepath}`, (err) => {
+  var filedata=await fs.createReadStream(filepath);
+ /*  await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
@@ -185,11 +183,11 @@ app.post("/static/avatar",   async  (req, res) => {
      // const size = 10;
       //const gender = 'm';
       
-    const form = new FormData();
+    /*  const form = new FormData();
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
-      form.append('file',   fs.createReadStream(filepath));
+      form.append('file',   filedata);
      
       var glbfileurl='';
       await fetch(url, {
@@ -208,7 +206,18 @@ app.post("/static/avatar",   async  (req, res) => {
            
           result=error;
         });    
-       
+         
+       const glbfilename= path.basename(glbfileurl);
+        //const glbDownloadFolder=cwd +'/public/glbs/';
+         
+        const glbDownloadPath=cwd +'/public/glbs/'+glbfilename
+        //const glbDownloadFile=glbDownloadFolder+glbfilename
+        await  download(glbfileurl,glbDownloadPath)
+        .then((response)=>{
+          var glbfilename=  response ;
+            glbfilename= path.basename(glbfilename);
+          result=localOrigin +'/static/glb/'+glbfilename;;
+        })  ;  */ 
       
         
         res.status(200).send(result);
