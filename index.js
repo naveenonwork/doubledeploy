@@ -170,6 +170,7 @@ app.post("/static/avatar",   async  (req, res) => {
  
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
+  result =filepath;
   //filepath =    cwd+'/public/'+filename; 
   fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
@@ -180,7 +181,7 @@ app.post("/static/avatar",   async  (req, res) => {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
   });  */
-  const url = 'https://hybrik.azurewebsites.net/';
+  /* const url = 'https://hybrik.azurewebsites.net/';
     const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
       //const gender = 'm';
@@ -207,7 +208,7 @@ app.post("/static/avatar",   async  (req, res) => {
           //console.error(error);
            
           result=error;
-        });    
+        });  */   
          
         /* const glbfilename= path.basename(glbfileurl);
         //const glbDownloadFolder=cwd +'/public/glbs/';
