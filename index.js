@@ -1,4 +1,3 @@
-// @ts-check
 import { join } from "path";
 import {  readFile, writeFile,readFileSync } from "fs";
 import fs from 'fs';
@@ -54,7 +53,7 @@ app.use(fileupload({
   preserveExtension: true,
   tempFileDir:  '/tmp/'
 })); 
-//app.use(express.static(STATIC_PATH));
+app.use(express.static(STATIC_PATH));
 app.get("/api/products/count", async (_req, res) => {
  
   const countData = await shopify.api.rest.Product.count({
@@ -168,23 +167,23 @@ app.post("/static/avatar",   async  (req, res) => {
   const gender = req.body.gender; 
   const imageType = req.files.file.mimetype.replace('image/', '.')
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+filename; 
-  
-  fs.renameSync(file.tempFilePath, filepath) 
-  //filepath=filepath+filename; 
+  var filepath =    file.tempFilePath+imageType; 
+  filepath =cwd+'/public/';
+   //fs.renameSync(file.tempFilePath, filepath) 
+  filepath=filepath+filename; 
    
  //var filedata=await fs.createReadStream(filepath);
- /*  await file.mv(`${filepath}`, (err) => {
+  await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  });  */
+  }); /*  */
   const url = 'https://hybrik.azurewebsites.net/';
     const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
       //const gender = 'm';
       
-    const form = new FormData();
+    /*  const form = new FormData();
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
@@ -208,7 +207,7 @@ app.post("/static/avatar",   async  (req, res) => {
           result=error;
         });    
          
-        /* const glbfilename= path.basename(glbfileurl);
+       const glbfilename= path.basename(glbfileurl);
         //const glbDownloadFolder=cwd +'/public/glbs/';
          
         const glbDownloadPath=cwd +'/public/glbs/'+glbfilename
