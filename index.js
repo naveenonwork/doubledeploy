@@ -183,7 +183,7 @@ app.post("/static/avatar",   async  (req, res) => {
      // const size = 10;
       //const gender = 'm';
       
-    /*  const form = new FormData();
+     const form = new FormData();
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
@@ -206,18 +206,8 @@ app.post("/static/avatar",   async  (req, res) => {
            
           result=error;
         });    
-         
-       const glbfilename= path.basename(glbfileurl);
-        //const glbDownloadFolder=cwd +'/public/glbs/';
-         
-        const glbDownloadPath=cwd +'/public/glbs/'+glbfilename
-        //const glbDownloadFile=glbDownloadFolder+glbfilename
-        await  download(glbfileurl,glbDownloadPath)
-        .then((response)=>{
-          var glbfilename=  response ;
-            glbfilename= path.basename(glbfilename);
-          result=localOrigin +'/static/glb/'+glbfilename;;
-        })  ;  */ 
+       /*   
+        */ 
       
         
         res.status(200).send(result);
