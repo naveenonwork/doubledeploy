@@ -170,7 +170,7 @@ app.post("/static/avatar",   async  (req, res) => {
   const imageType = req.files.file.mimetype.replace('image/', '.')
   
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+imageType; 
+  var filepath =    file.tempFilePath ; 
   //filepath =    cwd+'/public/'+filename; 
   //fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
