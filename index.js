@@ -157,24 +157,24 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
 
 
 app.post("/static/avatar",   async  (req, res) => {
-  const unique_session_id = uuidv4();
+   const unique_session_id = uuidv4();
   var fileBuffer = req.files.file.data;
   fileBuffer.name = req.files.file.name;
   
   var result="None"; 
   const file = req.files.file;
   var filename= req.files.file.name;
-  const size = req.body.size;
+/*   const size = req.body.size;
   const gender = req.body.gender; 
-  const sessionId = req.body.session_id;
+  const sessionId = req.body.session_id; */
   const imageType = req.files.file.mimetype.replace('image/', '.')
-  console.log(imageType)
+  
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
   //filepath =    cwd+'/public/'+filename; 
-  fs.renameSync(file.tempFilePath, filepath)
+  //fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
-   result=filepath;
+   // result=filepath;
  //var filedata=await fs.createReadStream(filepath);
    /*await file.mv(`${filepath}`, (err) => {
     if (err) {
@@ -182,16 +182,16 @@ app.post("/static/avatar",   async  (req, res) => {
     } 
   });  */
   var filedata=await fs.createReadStream(filepath);
-  //result=filedata;
+ 
     /* await file.mv(`${filepath}`, (err) => {
       if (err) {
         res.status(500).send({ message: "File upload failed", code: 200 });
       } 
     });   */
     const url = 'https://hybrik.azurewebsites.net/';
-      //const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
-       // const size = 10;
-        //const gender = 'm';
+      const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
+       const size = 10;
+        const gender = 'm';
         
       const form = new FormData();
         form.append('session_id', sessionId);
