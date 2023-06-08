@@ -14,7 +14,8 @@ import fileupload from "express-fileupload";
 import  fetch    from   "node-fetch" ;
 import  FormData  from  "form-data";
 import  http  from  "https";
- 
+import  path  from  "path"; 
+import fileUpload from "express-fileupload";
  
  
 
@@ -52,9 +53,9 @@ app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
   preserveExtension: true,
-  tempFileDir:  '/tmp/'
+  tempFileDir: '/tmp/'
 })); 
-//app.use(express.static(STATIC_PATH));
+app.use(express.static('public'));
 app.get("/api/products/count", async (_req, res) => {
  
   const countData = await shopify.api.rest.Product.count({
@@ -115,7 +116,7 @@ app.get("/static/glb/:glbfile",   async  (req, res) => {
 
 app.get("/static/script/:jsfile",   async  (req, res) => {
    var referer=req.headers.referer;
-  var filePath=cwd +'/public/'+req.params.jsfile ;
+  var filePath=cwd +'/'+req.params.jsfile ;
   res.writeHead(200, {'Content-Type': 'text/javascript'});
   const readStream = fs.createReadStream(filePath);
   readStream.pipe(res); 
@@ -129,10 +130,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
   var referer=req.headers.referer; 
    /* referer= referer.replace(/\/$/, ""); */
     var id=req.params.id;
-    
     mongoClient = await connectToDatabse(MongoPath);
-   
-
      const db = mongoClient.db('double');
      const collection = db.collection('settings');
     
@@ -140,17 +138,17 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
        settings=data;
        count=data.length;
       });  
-      
-    /*  var saved_shop="https://"+settings.shop+'/';
-      //res.status(200).send(saved_shop); 
-        if(saved_shop==referer){*/
-        var filePath=cwd +'/public/'+req.params.jsfile ;
+       
+     var saved_shop="https://"+settings.shop+'/';
+      //res.status(200).send(saved_shop);
+       if(saved_shop==referer){
+        var filePath=cwd +'/'+req.params.jsfile ;
         res.writeHead(200, {'Content-Type': 'text/javascript'});
-        const readStream =   fs.createReadStream(filePath);
+        const readStream = fs.createReadStream(filePath);
         readStream.pipe(res); 
-     /*    } else{
+       } else{
         res.status(500).send("OOPS!!");
-       }  */ 
+       }
        
   
 })
@@ -168,9 +166,9 @@ app.post("/static/avatar",   async  (req, res) => {
   const gender = req.body.gender; 
   const imageType = req.files.file.mimetype.replace('image/', '.')
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+filename; 
+  var filepath =    file.tempFilePath+imageType; 
   
-  fs.renameSync(file.tempFilePath, filepath) 
+  fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
    
  //var filedata=await fs.createReadStream(filepath);

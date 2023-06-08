@@ -1,5 +1,4 @@
-type="frontend"
+type="backend"
 
 [commands]
 dev = "npm run dev"
-build = "npm run build"
