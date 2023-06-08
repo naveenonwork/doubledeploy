@@ -157,7 +157,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
 
 
 app.post("/static/avatar",   async  (req, res) => {
-  onst unique_session_id = uuidv4();
+  const unique_session_id = uuidv4();
   var fileBuffer = req.files.file.data;
   fileBuffer.name = req.files.file.name;
   
