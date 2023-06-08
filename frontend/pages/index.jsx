@@ -19,7 +19,6 @@ import { FrontButtonCard, PolarisProvider } from "../components";
 
 export default function HomePage() {
   return (
-    <PolarisProvider>
       <Page>
         <TitleBar title="Double" primaryAction={null} />
         <Layout>
@@ -53,6 +52,6 @@ export default function HomePage() {
           </Layout.Section>
         </Layout>
       </Page>
-    </PolarisProvider>
+     
   );
 }
