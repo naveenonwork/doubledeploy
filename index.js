@@ -1,5 +1,5 @@
 import { join } from "path";
-import {  readFile, writeFile,readFileSync } from "fs";
+import { createReadStream , readFile, writeFile,readFileSync } from "fs";
 import fs from 'fs';
 import express from "express";
 import serveStatic from "serve-static";
@@ -47,12 +47,12 @@ app.use("/api/*", shopify.validateAuthenticatedSession());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-app.use(fileupload({
+/* app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
   preserveExtension: true,
   tempFileDir:  '/tmp/'
-})); 
+})); */ 
 app.use(express.static(STATIC_PATH));
 app.get("/api/products/count", async (_req, res) => {
  
@@ -169,10 +169,12 @@ app.post("/static/avatar",   async  (req, res) => {
   //const localOrigin= req.body.localOrigin; 
   var filepath =    file.tempFilePath+imageType; 
   
-  fs.renameSync(file.tempFilePath, filepath) 
+ // fs.renameSync(file.tempFilePath, filepath) 
   //filepath=filepath+filename; 
    
-  var filedata=await fs.createReadStream(filepath);
+ // var filedata=await fs.createReadStream(filepath);
+
+  const fileStream = createReadStream(req.files.file.path);
  /*  await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
@@ -187,7 +189,7 @@ app.post("/static/avatar",   async  (req, res) => {
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
-      form.append('file',   filedata);
+      form.append('file',   fileStream);
      
       var glbfileurl='';
       await fetch(url, {
