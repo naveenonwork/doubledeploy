@@ -14,7 +14,7 @@ import fileupload from "express-fileupload";
 import  fetch    from   "node-fetch" ;
 import  FormData  from  "form-data";
 import  http  from  "https";
-import  path  from  "path"; 
+ 
  
  
 
@@ -52,7 +52,7 @@ app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
   preserveExtension: true,
-  tempFileDir:  '/tmp'
+  tempFileDir:  '/tmp/'
 })); 
 app.use(express.static('public'));
 app.get("/api/products/count", async (_req, res) => {
@@ -157,24 +157,29 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
 
 
 app.post("/static/avatar",   async  (req, res) => {
-  const unique_session_id = uuidv4();
+  onst unique_session_id = uuidv4();
   var fileBuffer = req.files.file.data;
   fileBuffer.name = req.files.file.name;
-   
+  
   var result="None"; 
   const file = req.files.file;
-  //result= req.files.file.name;
+  var filename= req.files.file.name;
   const size = req.body.size;
   const gender = req.body.gender; 
+  const imageType = req.files.file.mimetype.replace('image/', '.')
   //const localOrigin= req.body.localOrigin; 
-  const filepath =  cwd +"/public/" + file.name; 
+  var filepath =    file.tempFilePath+filename; 
   
-  await file.mv(`${filepath}`, (err) => {
+  fs.renameSync(file.tempFilePath, filepath)
+  //filepath=filepath+filename; 
+   
+ //var filedata=await fs.createReadStream(filepath);
+ /*  await file.mv(`${filepath}`, (err) => {
     if (err) {
       res.status(500).send({ message: "File upload failed", code: 200 });
     } 
-  }); 
-    const url = 'https://hybrik.azurewebsites.net/';
+  });  */
+  const url = 'https://hybrik.azurewebsites.net/';
     const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
      // const size = 10;
       //const gender = 'm';
@@ -183,7 +188,7 @@ app.post("/static/avatar",   async  (req, res) => {
       form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
-      form.append('file',  fs.createReadStream(filepath));
+      form.append('file',   fs.createReadStream(filepath));
      
       var glbfileurl='';
       await fetch(url, {
