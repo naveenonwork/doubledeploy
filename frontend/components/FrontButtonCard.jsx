@@ -63,8 +63,8 @@ export function FrontButtonCard(props) {
 
  
   const shop= isLoadingCount ? "-" : data.session.shop; 
-  
-  const code='<div id="double_button_opener_container" \n data-origin="'+localOrigin+'"  \n data-host="'+host+'" >\n</div>';
+  const origin= process.env.DOUBLE_URL?process.env.DOUBLE_URL : localOrigin;
+  const code='<div id="double_button_opener_container" \n data-origin="'+origin+'"  \n data-host="'+host+'" >\n</div>';
 
   
  
