@@ -63,7 +63,7 @@ export function FrontButtonCard(props) {
 
  
   const shop= isLoadingCount ? "-" : data.session.shop; 
-  const origin= process.env.DOUBLE_URL?process.env.DOUBLE_URL : localOrigin;
+  const origin= "https://double-frontend.onrender.com";
   const code='<div id="double_button_opener_container" \n data-origin="'+origin+'"  \n data-host="'+host+'" >\n</div>';
 
   
