@@ -248,7 +248,7 @@ app.post("/static/garment",   async  (req, res) => {
 });
 
 
-app.post("/static/ping",   async  (req, res) => {
+app.get("/static/ping",   async  (req, res) => {
   const result="You get it all right!!";
   res.status(200).send(result);
 })
