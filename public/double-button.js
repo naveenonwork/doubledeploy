@@ -1,10 +1,21 @@
 
 var double_button_opener = document.getElementById('double_button_opener_container');
 
-if(double_button_opener){
+// Get value of single parameter
+
+hasdemo=false;
+var field = 'dobledemo';
+var url = window.location.href;
+if(url.indexOf('?' + field + '=') != -1)
+  hasdemo= true;
+else if(url.indexOf('&' + field + '=') != -1)
+  hasdemo= true;
+
+if(double_button_opener && hasdemo){
   var base_url = window.location.origin;
   
     product_id=double_button_opener.getAttribute('data-id')
+
   
     host=double_button_opener.getAttribute('data-host')
     //host_location="SHOPIFY_LOCATION_URL";
