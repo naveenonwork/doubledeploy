@@ -170,7 +170,8 @@ app.post("/static/avatar",   async  (req, res) => {
   const imageType = req.files.file.mimetype.replace('image/', '.')
   
   //const localOrigin= req.body.localOrigin; 
-  var filepath =    file.tempFilePath+imageType; 
+  const ext=path.extname(filename);
+  var filepath =    file.tempFilePath+ext; 
       //filepath =    cwd+'/public/'+filename; 
   fs.renameSync(file.tempFilePath, filepath)
   //filepath=filepath+filename; 
@@ -188,7 +189,7 @@ app.post("/static/avatar",   async  (req, res) => {
       //const gender = 'm';
       
     const form = new FormData();
-      form.append('session_id', sessionId);
+      form.append('session_id', unique_session_id.toString());
       form.append('size', size);
       form.append('gender', gender);
       form.append('file',  filedata);
