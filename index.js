@@ -13,6 +13,7 @@ import fileupload from "express-fileupload";
 import  fetch    from   "node-fetch" ;
 import  FormData  from  "form-data";
 import  http  from  "https"; 
+import cors from "cors"
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 const MongoPath =  process.env.NODE_ENV === "production"
@@ -36,6 +37,10 @@ app.post(
   shopify.config.webhooks.path,
   shopify.processWebhooks({ webhookHandlers: GDPRWebhookHandlers })
 );
+
+app.use(cors({
+  origin: '*'
+}));
 
 // If you are adding routes outside of the /api path, remember to
 // also add a proxy rule for them in web/frontend/vite.config.js
@@ -253,118 +258,7 @@ app.get("/static/ping",   async  (req, res) => {
   res.status(200).send(result);
 })
 
-
-app.post("/static/testgarment",   async  (req, res) => {
-     
-  var result ;
-  var glbfileurl='';
-  var avatarglb='';
-   const sessionId = req.body.session;
-  const size = req.body.size;
-  const productid = req.body.productid; 
-  const localOrigin = req.body.localOrigin; 
  
-   const url = 'https://simple-to-complex.azurewebsites.net' ;
-    let garmentData = { 
-      "productid": productid ,
-      "session": sessionId ,
-      "size":size
-    }
-   ;
-
-
-
-  /*await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(garmentData),
-      headers: {"Content-Type": "application/json"}
-    })
-   .then((response) =>response.json())
-    .then((data) => {
-      console.log("glb Response2",data)
-      result=data;
-        avatarglb=data.avatarglb;
-       glbfileurl=data.uppergarmentglb;  
-       glbfileurl=glbfileurl.replace('http://','https://');   
-      })
-    .catch((error) => {
-        //console.error(error);
-        result=error;
-      });   
-       
-      const glbfilename= path.basename(glbfileurl);
- 
-       
-      const glbDownloadPath=cwd +'/public/glbs/'+glbfilename
-      
-      //const glbDownloadFile=glbDownloadFolder+glbfilename
-      await  download(glbfileurl,glbDownloadPath)
-      .then((response)=>{
-
-        var glbfilename=  response ;
-          glbfilename= path.basename(glbfilename);
-        result={
-          "avatarglb":avatarglb,
-          'uppergarmentglb':localOrigin+'/static/glb/'+glbfilename
-      
-          }
-
-      }).catch((error) => {
-        result={
-          "error": error,
-          "glbfileurl": glbfileurl
-      
-          }
-        
-      });  */     
-
-result ={
-	"avatarglb": "",
-	"lowergarmentglb": localOrigin+'/static/glb/final_M4128gw016.glb',
-	"uppergarmentglb": localOrigin+'/static/glb/final_M4128gw016.glb'
-}
-      
-      res.status(200).send(result);
-});
-
-
-function download(url, dest) {
-  return new Promise((resolve, reject) => {
-      const file = fs.createWriteStream(dest);
-
-      const request = http.get(url, response => {
-          if (response.statusCode === 200) {
-              response.pipe(file);
-          } else {
-              file.close();
-              fs.unlink(dest, () => {}); // Delete temp file
-              reject(`Server responded with ${response.statusCode}: ${response.statusMessage}`);
-          }
-      });
-
-      request.on("error", err => {
-          file.close();
-          fs.unlink(dest, () => {}); // Delete temp file
-          reject(err.message);
-      });
-
-      file.on("finish", () => {
-      
-          resolve(dest);
-      });
-
-      file.on("error", err => {
-          file.close();
-
-          if (err.code === "EEXIST") {
-              reject("File already exists");
-          } else {
-              fs.unlink(dest, () => {}); // Delete temp file
-              reject(err.message);
-          }
-      });
-  });
-}
   
 app.post("/api/settings/get", async (_req, res) => {
   const unique_session_id = uuidv4();
@@ -438,24 +332,7 @@ export async function findSettingsById(collection, id) {
 export async function deleteSettingsByShop(collection, shop) {
   await collection.deleteMany({ shop });
 }
-/* export async function setUpScript(wd,url){
-  const script_file=wd+'/double-button.js';
-  const script_file_topost=wd+'/public/js/double-button.js';
-   
-  readFile(script_file, 'utf8', function (err,data) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    var content = data.replace(/SHOPIFY_LOCATION_URL/g, url);
-  
-       writeFile(script_file_topost, content, 'utf8', function (werr) {
-       // console.log(werr); 
-    });  
-  });
-
-  return true;
-} */
+ 
 app.post("/api/doublebutton/process", async (_req, res) => {
   let result='success';
   let status = 200;
