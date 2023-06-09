@@ -188,7 +188,7 @@ app.post("/static/avatar",   async  (req, res) => {
       //const gender = 'm';
       
     const form = new FormData();
-      form.append('session_id', unique_session_id.toString());
+      form.append('session_id', sessionId);
       form.append('size', size);
       form.append('gender', gender);
       form.append('file',  filedata);
