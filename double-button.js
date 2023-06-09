@@ -23,7 +23,7 @@ if(double_button_opener){
       product_id=selectedID;
       let a= document.createElement('a');
       a.target= '_new';
-      a.href= host_location+"/double?host="+host+"&id="+product_id; 
+      a.href= host_location+"/?host="+host+"&id="+product_id; 
       a.click();
     });   
   //  const btn  = document.createElement('a'); 
