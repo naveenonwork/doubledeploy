@@ -32,10 +32,11 @@ if(double_button_opener && hasdemo){
       }
       
       product_id=selectedID;
-      let a= document.createElement('a');
+    /*   let a= document.createElement('a');
       a.target= '_new';
       a.href= host_location+"/?host="+host+"&id="+product_id; 
-      a.click();
+      a.click(); */
+      window.location.href=host_location+"/?host="+host+"&id="+product_id; 
     });   
   //  const btn  = document.createElement('a'); 
   //  btn.href =  host+"&id="+product_id; 
