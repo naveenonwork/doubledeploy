@@ -142,7 +142,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
        settings=data;
        count=data.length;
       });  
-      
+      await mongoClient.close();
     /*  var saved_shop="https://"+settings.shop+'/';
       //res.status(200).send(saved_shop); 
         if(saved_shop==referer){*/
@@ -150,6 +150,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
         res.writeHead(200, {'Content-Type': 'text/javascript'});
         const readStream =   fs.createReadStream(filePath);
         readStream.pipe(res); 
+
      /*    } else{
         res.status(500).send("OOPS!!");
        }  */ 
