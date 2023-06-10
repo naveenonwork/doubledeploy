@@ -42,7 +42,7 @@ if(double_button_opener && hasdemo){
   //  btn.href =  host+"&id="+product_id; 
     
   //  btn.setAttribute("target", "_blank");
-    btn.setAttribute("style","position: fixed;bottom: 25px;right: 25px;") ;
+    btn.setAttribute("style","position: fixed;bottom: 25px;right: 25px;z-index:99999") ;
     btn.innerHTML = "3d View";
     btn.classList.add("btn");
   /*   btn.classList.add("btn--secondary-accent");
