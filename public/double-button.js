@@ -4,7 +4,7 @@ var double_button_opener = document.getElementById('double_button_opener_contain
 // Get value of single parameter
 
 hasdemo=false;
-var field = 'dobledemo';
+var field = 'doubledemo';
 var url = window.location.href;
 if(url.indexOf('?' + field + '=') != -1)
   hasdemo= true;
