@@ -132,7 +132,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
    /* referer= referer.replace(/\/$/, ""); */
     var id=req.params.id;
     
-    mongoClient = await connectToDatabse(MongoPath);
+    /*  mongoClient = await connectToDatabse(MongoPath);
    
 
      const db = mongoClient.db('double');
@@ -143,7 +143,7 @@ app.get("/static/js/:id/:jsfile",   async  (req, res) => {
        count=data.length;
       });  
       await mongoClient.close();
-    /*  var saved_shop="https://"+settings.shop+'/';
+    var saved_shop="https://"+settings.shop+'/';
       //res.status(200).send(saved_shop); 
         if(saved_shop==referer){*/
         var filePath=cwd +'/public/'+req.params.jsfile ;
