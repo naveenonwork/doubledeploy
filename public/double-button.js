@@ -42,10 +42,10 @@ if(double_button_opener && hasdemo){
   //  btn.href =  host+"&id="+product_id; 
     
   //  btn.setAttribute("target", "_blank");
-    btn.setAttribute("style","position: fixed;bottom: 10px;right: 10px;") ;
+    btn.setAttribute("style","position: fixed;bottom: 25px;right: 25px;") ;
     btn.innerHTML = "3d View";
-/*     btn.classList.add("btn");
-    btn.classList.add("btn--secondary-accent");
+    btn.classList.add("btn");
+  /*   btn.classList.add("btn--secondary-accent");
     btn.classList.add("btn--test"); */
    //double_button_opener.appendChild(btn);
    body=document.getElementsByTagName("BODY")[0]; 
