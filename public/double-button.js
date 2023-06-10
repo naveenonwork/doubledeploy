@@ -32,22 +32,23 @@ if(double_button_opener && hasdemo){
       }
       
       product_id=selectedID;
-    /*   let a= document.createElement('a');
+      let a= document.createElement('a');
       a.target= '_new';
       a.href= host_location+"/?host="+host+"&id="+product_id; 
-      a.click(); */
-      window.location.href=host_location+"/?host="+host+"&id="+product_id; 
+      a.click();
+      
     });   
   //  const btn  = document.createElement('a'); 
   //  btn.href =  host+"&id="+product_id; 
     
   //  btn.setAttribute("target", "_blank");
-
+    btn.setAttribute("style","position: fixed;bottom: 10px;right: 10px;") ;
     btn.innerHTML = "3d View";
-    btn.classList.add("btn");
+/*     btn.classList.add("btn");
     btn.classList.add("btn--secondary-accent");
-    btn.classList.add("btn--test");
-   double_button_opener.appendChild(btn);
- 
+    btn.classList.add("btn--test"); */
+   //double_button_opener.appendChild(btn);
+   body=document.getElementsByTagName("BODY")[0]; 
+   body.appendChild(btn);
   
 }
