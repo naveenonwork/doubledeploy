@@ -63,7 +63,8 @@ export function FrontButtonCard(props) {
 
  
   const shop= isLoadingCount ? "-" : data.session.shop; 
-  const origin= "https://double-frontend.onrender.com";
+  const origin=isLoadingCount ? "..." :  data.double_url;
+  //const origin= "https://double-frontend.onrender.com";
   const code='<div id="double_button_opener_container" \n data-origin="'+origin+'"  \n data-host="'+host+'" >\n</div>';
 
   
@@ -116,7 +117,7 @@ export function FrontButtonCard(props) {
       >
         <Box  padding="2" >
           <Heading>
-           Please add below code into sections/product-template.liquid 
+           Please add below code into your product single template 
           </Heading>
           </Box>
          

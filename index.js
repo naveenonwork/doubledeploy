@@ -99,6 +99,7 @@ app.get("/api/settings/get", async (_req, res) => {
   }  
 
   const result={session:res.locals.shopify.session,
+    double_url:process.env.DOUBLE_URL,
     settings:settings 
     
   };
