@@ -32,6 +32,11 @@ if(double_button_opener && hasdemo){
       }
       
       product_id=selectedID;
+      // changed for last 9 number
+      var productidstring =location.href;
+      productidstring=productidstring.split('?')[0];
+      productidstring=productidstring.substr(productidstring.length - 9);
+      product_id=productidstring;
       let a= document.createElement('a');
       a.target= '_new';
       a.href= host_location+"/?host="+host+"&id="+product_id; 

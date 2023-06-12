@@ -53,7 +53,7 @@ app.use(express.urlencoded({ extended: true }))
  app.use(fileupload({
   useTempFiles: true,
   safeFileNames: true,
-  preserveExtension: true,
+  preserveExtension: 4,
   tempFileDir:  '/tmp/'
 }));  
 app.use(express.static(STATIC_PATH));
