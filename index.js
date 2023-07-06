@@ -255,7 +255,68 @@ app.post("/static/garment",   async  (req, res) => {
         
         res.status(200).send(result);
 });
+app.post("/static/process",   async  (req, res) => {
+  const unique_session_id = uuidv4();
+  var fileBuffer = req.files.file.data;
+  fileBuffer.name = req.files.file.name;
+  
+  var result="None"; 
+  const file = req.files.file;
+  var filename= req.files.file.name;
+  const height = req.body.height;
+  const product_id = req.body.product_id; 
+  const gender = req.body.gender; 
+   
+  const imageType = req.files.file.mimetype.replace('image/', '.')
+  
+  //const localOrigin= req.body.localOrigin; 
+  const ext=path.extname(filename);
+  var filepath =    file.tempFilePath+ext; 
+      //filepath =    cwd+'/public/'+filename; 
+  fs.renameSync(file.tempFilePath, filepath)
+  //filepath=filepath+filename; 
+   //result=filepath;
+ var filedata=await fs.createReadStream(filepath);
+   /*await file.mv(`${filepath}`, (err) => {
+    if (err) {
+      res.status(500).send({ message: "File upload failed", code: 200 });
+    } 
+  });  */
+ 
+    const url = 'https://probabilistic.azurewebsites.net';
+    const sessionId = 'bmF2ZWVudGVzdDEubXlzaG9waWZ5LmNvbS9hZG1pbg';
+       //  size = 10;
+      //const gender = 'm';
+      
+    const form = new FormData();
+      form.append('session_id', unique_session_id.toString());
+      form.append('height', height);
+      form.append('gender', gender);
+      form.append('file',  filedata);
+     form.append('product_id',  product_id);
+      try {  
+      await fetch(url, {
+        method: 'POST',
+        body: form,
+        headers: form.getHeaders(),
+      })
+      .then((response) => response.text())
+        .then((data) => {
+         // console.log(data); 
+         result=data;
+        })
+        .catch((error) => {
+          //console.error(error);
+          result=error;
+        }); 
+      } catch (error) {
+        // Code to handle the error or exception
+        result=error;
+      }
 
+        res.status(200).send(result);
+   
+});
 
 app.get("/static/ping",   async  (req, res) => {
   const result="You get it all right!!";
