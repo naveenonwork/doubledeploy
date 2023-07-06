@@ -265,10 +265,8 @@ app.post("/static/process",   async  (req, res) => {
   var filename= req.files.file.name;
   const height = req.body.height;
   const product_id = req.body.product_id; 
-  const gender = req.body.gender; 
-   
-  const imageType = req.files.file.mimetype.replace('image/', '.')
-  
+  const gender = req.body.gender;    
+  const imageType = req.files.file.mimetype.replace('image/', '.')  
   //const localOrigin= req.body.localOrigin; 
   const ext=path.extname(filename);
   var filepath =    file.tempFilePath+ext; 
